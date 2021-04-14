@@ -8,13 +8,13 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class UserRole {
     @Id
     @SequenceGenerator(
-            name = "userole_sequence",
-            sequenceName = "userole_sequence",
+            name = "userRole_sequence",
+            sequenceName = "userRole_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = SEQUENCE,
-            generator = "userole_sequence"
+            generator = "userRole_sequence"
     )
     @Column(
             name = "id",
@@ -31,6 +31,10 @@ public class UserRole {
     public UserRole(Long id, String title) {
         this.id = id;
         this.title = title;
+    }
+
+    public UserRole() {
+
     }
 
     public Long getId() {

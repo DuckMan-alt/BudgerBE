@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 
 @Entity(name = "Transaction")
 public class Transaction {
-
+    @Id
     private Integer budget_id;
 
     private Integer category_id;
@@ -28,6 +28,10 @@ public class Transaction {
         this.category_id = category_id;
         this.value = value;
         this.date = date;
+    }
+
+    public Transaction() {
+
     }
 
     public Integer getBudget_id() {

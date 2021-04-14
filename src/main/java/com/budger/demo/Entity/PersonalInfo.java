@@ -9,7 +9,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class PersonalInfo {
     @Id
     @Column(
-            name = "id",
+            name = "account_id",
             updatable = false
     )
     private Integer account_id;
@@ -31,6 +31,10 @@ public class PersonalInfo {
         this.first_name = first_name;
         this.last_name = last_name;
         this.birthday_date = birthday_date;
+    }
+
+    public PersonalInfo() {
+
     }
 
     public Integer getAccount_id() {

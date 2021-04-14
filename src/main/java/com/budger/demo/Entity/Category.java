@@ -33,6 +33,10 @@ public class Category {
         this.categor_name = categor_name;
     }
 
+    public Category() {
+
+    }
+
     public Long getId() {
         return id;
     }

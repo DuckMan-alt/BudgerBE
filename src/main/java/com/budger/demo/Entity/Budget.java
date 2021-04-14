@@ -26,6 +26,10 @@ public class Budget {
         this.id = id;
     }
 
+    public Budget() {
+
+    }
+
     public Long getId() {
         return id;
     }

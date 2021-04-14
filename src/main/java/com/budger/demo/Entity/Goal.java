@@ -59,6 +59,10 @@ public class Goal {
         this.date = date;
     }
 
+    public Goal() {
+
+    }
+
     public Long getId() {
         return id;
     }

@@ -30,6 +30,10 @@ public class Family {
         this.family_name = family_name;
     }
 
+    public Family() {
+
+    }
+
     public Long getId() {
         return id;
     }

@@ -43,6 +43,9 @@ public class Account {
     //FK
     private Integer account_role;
 
+    public Account() {
+    }
+
     public Account(Long id,
                    String username,
                    String email,
