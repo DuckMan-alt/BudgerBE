@@ -51,12 +51,11 @@ public class Account {
     public Account() {
     }
 
-    public Account(Long id,
+    public Account(
                    String username,
                    String email,
                    Integer password,
                    Integer account_role) {
-        this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
