@@ -5,6 +5,12 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Account")
+@Table(
+        name = "account",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "student_email_unique", columnNames = "email")
+        }
+)
 public class Account {
     @Id
     @SequenceGenerator(
@@ -30,8 +36,7 @@ public class Account {
 
     @Column(
             name = "email",
-            nullable = false,
-            unique = true
+            nullable = false
     )
     private String email;
 

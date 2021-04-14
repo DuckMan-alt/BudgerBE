@@ -5,6 +5,13 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Category")
+@Table(
+        name = "category",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "category_name_unique", columnNames = "categor_name")
+        }
+)
+
 public class Category {
     @Id
     @SequenceGenerator(
@@ -23,8 +30,7 @@ public class Category {
     private Long id;
     @Column(
             name = "categor_name",
-            nullable = false,
-            unique = true
+            nullable = false
     )
     private String categor_name;
 

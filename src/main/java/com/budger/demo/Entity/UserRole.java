@@ -5,6 +5,12 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "UserRole")
+@Table(
+        name = "user_role",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "title_unique", columnNames = "title")
+        }
+)
 public class UserRole {
     @Id
     @SequenceGenerator(
@@ -23,7 +29,6 @@ public class UserRole {
     private Long id;
     @Column(
             name = "title",
-            unique = true,
             nullable = false
     )
     private String title;
