@@ -1,7 +1,31 @@
 package com.budger.demo.Entity;
 
+import javax.persistence.*;
+
+import static javax.persistence.GenerationType.SEQUENCE;
+
+@Entity(name = "Category")
 public class Category {
+    @Id
+    @SequenceGenerator(
+            name = "category_sequence",
+            sequenceName = "category_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "category_sequence"
+    )
+    @Column(
+            name = "id",
+            updatable = false
+    )
     private Long id;
+    @Column(
+            name = "categor_name",
+            nullable = false,
+            unique = true
+    )
     private String categor_name;
 
     public Category(Long id, String categor_name) {

@@ -1,10 +1,46 @@
 package com.budger.demo.Entity;
 
+import javax.persistence.*;
+
+import static javax.persistence.GenerationType.SEQUENCE;
+
+@Entity(name = "Account")
 public class Account {
+    @Id
+    @SequenceGenerator(
+            name = "account_sequence",
+            sequenceName = "account_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "account_sequence"
+    )
+    @Column(
+            name = "id",
+            updatable = false
+    )
     private  Long id;
+
+    @Column(
+            name = "username",
+            nullable = false
+    )
     private String username;
+
+    @Column(
+            name = "email",
+            nullable = false,
+            unique = true
+    )
     private String email;
+
+    @Column(
+            name = "password",
+            nullable = false
+    )
     private Integer password;
+    //FK
     private Integer account_role;
 
     public Account(Long id,

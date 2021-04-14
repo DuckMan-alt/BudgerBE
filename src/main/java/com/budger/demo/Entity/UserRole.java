@@ -1,7 +1,31 @@
 package com.budger.demo.Entity;
 
+import javax.persistence.*;
+
+import static javax.persistence.GenerationType.SEQUENCE;
+
+@Entity(name = "UserRole")
 public class UserRole {
+    @Id
+    @SequenceGenerator(
+            name = "userole_sequence",
+            sequenceName = "userole_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "userole_sequence"
+    )
+    @Column(
+            name = "id",
+            updatable = false
+    )
     private Long id;
+    @Column(
+            name = "title",
+            unique = true,
+            nullable = false
+    )
     private String title;
 
     public UserRole(Long id, String title) {

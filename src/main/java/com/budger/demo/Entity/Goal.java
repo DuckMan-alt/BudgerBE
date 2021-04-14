@@ -1,13 +1,48 @@
 package com.budger.demo.Entity;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
+@Entity(name = "Goal")
 public class Goal {
+    @Id
+    @SequenceGenerator(
+            name = "goal_sequence",
+            sequenceName = "goal_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "goal_sequence"
+    )
+    @Column(
+            name = "id",
+            updatable = false
+    )
     private Long id;
+    @Column(
+            name = "budget_id",
+            nullable = false
+    )
     private Integer budget_id;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(
+            name = "value",
+            nullable = false
+            //Money
+    )
     private Integer value;
+    @Column(name = "description",
+            columnDefinition = "TEXT"
+    )
     private String description;
+
+    @Column(name = "date")
     private Timestamp date;
 
     public Goal(Long id,

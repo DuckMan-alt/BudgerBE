@@ -1,11 +1,26 @@
 package com.budger.demo.Entity;
 
+import javax.persistence.*;
 import java.sql.Date;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
+@Entity(name = "PersonalInfo")
 public class PersonalInfo {
+    @Id
+    @Column(
+            name = "id",
+            updatable = false
+    )
     private Integer account_id;
+
+    @Column(name = "first_name")
     private String first_name;
+
+    @Column(name = "last_name")
     private String last_name;
+
+    @Column(name = "birthday_date")
     private Date birthday_date;
 
     public PersonalInfo(Integer account_id,
