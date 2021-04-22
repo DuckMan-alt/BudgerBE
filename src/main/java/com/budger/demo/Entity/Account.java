@@ -24,9 +24,14 @@ public class Account {
     )
     @Column(
             name = "id",
-            updatable = false
+            updatable = false,
+            nullable = false
     )
     private  Long id;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "account")
+    private PersonalInfo personalInfo;
+
 
     @Column(
             name = "username",
@@ -45,8 +50,25 @@ public class Account {
             nullable = false
     )
     private Integer password;
-    //FK
-    private Integer account_role;
+
+    public PersonalInfo getPersonalInfo() {
+        return personalInfo;
+    }
+
+    public void setPersonalInfo(PersonalInfo personalInfo) {
+        this.personalInfo = personalInfo;
+    }
+
+    @ManyToOne
+    @JoinColumn(
+            name = "account_role",
+            nullable = false,
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "account_role_fk"
+            )
+    )
+    private UserRole account_role;
 
     public Account() {
     }
@@ -54,12 +76,11 @@ public class Account {
     public Account(
                    String username,
                    String email,
-                   Integer password,
-                   Integer account_role) {
+                   Integer password
+                  ) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.account_role = account_role;
     }
 
     public Long getId() {
@@ -94,17 +115,17 @@ public class Account {
         this.password = password;
     }
 
-    public Integer getAccount_role() {
+    public UserRole getAccount_role() {
         return account_role;
     }
 
-    public void setAccount_role(Integer account_role) {
+    public void setAccount_role(UserRole account_role) {
         this.account_role = account_role;
     }
 
     @Override
     public String toString() {
-        return "account{" +
+        return "Account{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +

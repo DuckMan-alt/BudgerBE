@@ -2,6 +2,9 @@ package com.budger.demo.Entity;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "UserRole")
@@ -24,7 +27,8 @@ public class UserRole {
     )
     @Column(
             name = "id",
-            updatable = false
+            updatable = false,
+            nullable = false
     )
     private Long id;
     @Column(
@@ -33,8 +37,14 @@ public class UserRole {
     )
     private String title;
 
-    public UserRole(Long id, String title) {
-        this.id = id;
+    @OneToMany(
+            mappedBy = "account_role",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST,CascadeType.REMOVE}
+    )
+    private List<Account> accounts = new ArrayList<>();
+
+    public UserRole(String title) {
         this.title = title;
     }
 
@@ -56,6 +66,20 @@ public class UserRole {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void removeAccount(Account account){
+        if(!this.accounts.contains(account)){
+            this.accounts.remove(account);
+            account.setAccount_role(null);
+        }
+    }
+
+    public void addAccount(Account account){
+        if(!this.accounts.contains(account)){
+            this.accounts.add(account);
+            account.setAccount_role(this);
+        }
     }
 
     @Override

@@ -2,17 +2,26 @@ package com.budger.demo.Entity;
 
 import javax.persistence.*;
 import java.sql.Date;
-
-import static javax.persistence.GenerationType.SEQUENCE;
+import java.util.Optional;
 
 @Entity(name = "PersonalInfo")
+@Table(name ="personal_info")
 public class PersonalInfo {
+
     @Id
-    @Column(
+    private Long account_id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(
             name = "account_id",
-            updatable = false
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "personal_info_to_account_id_fk"
+            )
     )
-    private Integer account_id;
+    @MapsId
+    private Account account;
+
 
     @Column(name = "first_name")
     private String first_name;
@@ -23,25 +32,29 @@ public class PersonalInfo {
     @Column(name = "birthday_date")
     private Date birthday_date;
 
-    public PersonalInfo(Integer account_id,
-                        String first_name,
-                        String last_name,
-                        Date birthday_date) {
-        this.account_id = account_id;
+    public PersonalInfo() {
+    }
+
+    public PersonalInfo(String first_name, String last_name, Date birthday_date) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.birthday_date = birthday_date;
     }
 
-    public PersonalInfo() {
 
+    public Account getAccount() {
+        return account;
     }
 
-    public Integer getAccount_id() {
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Long getAccount_id() {
         return account_id;
     }
 
-    public void setAccount_id(Integer account_id) {
+    public void setAccount_id(Long account_id) {
         this.account_id = account_id;
     }
 
@@ -67,6 +80,10 @@ public class PersonalInfo {
 
     public void setBirthday_date(Date birthday_date) {
         this.birthday_date = birthday_date;
+    }
+
+    public void addAccount(Account account){
+        this.account_id = account.getId();
     }
 
     @Override
