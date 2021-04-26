@@ -35,6 +35,20 @@ public class BudgerApplication {
             );
             dima.setAccount_role(admin);
             accountRepo.save(dima);
+
+            System.out.println(accountRepo.findById(1L).toString());
+
+            PersonalInfo dimaInfo = new PersonalInfo("Dmitry","Mikhno",new Date(100,6,4));
+            dimaInfo.setAccount(dima);
+            personalInfoRepo.save(dimaInfo);
+
+            System.out.println(accountRepo.findById(1L).toString());
+
+            System.out.println(personalInfoRepo.findById(1).toString());
+
+            accountRepo.deleteAll();
+            System.out.println(personalInfoRepo.count());
+            System.out.println(userRoleRepo.count());
         };
     }
 

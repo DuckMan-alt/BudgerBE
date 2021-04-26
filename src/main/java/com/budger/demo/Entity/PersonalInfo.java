@@ -4,14 +4,30 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Optional;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Entity(name = "PersonalInfo")
 @Table(name ="personal_info")
 public class PersonalInfo {
 
     @Id
-    private Long account_id;
+    @SequenceGenerator(
+            name = "personal_info_sequence",
+            sequenceName = "personal_info_sequence",
+            schema = "public",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "card_sequence"
+    )
+    @Column(
+            name = "id",
+            updatable = false
+    )
+    private Integer id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(
             name = "account_id",
             referencedColumnName = "id",
@@ -19,7 +35,6 @@ public class PersonalInfo {
                     name = "personal_info_to_account_id_fk"
             )
     )
-    @MapsId
     private Account account;
 
 
@@ -50,12 +65,12 @@ public class PersonalInfo {
         this.account = account;
     }
 
-    public Long getAccount_id() {
-        return account_id;
+    public Integer getId() {
+        return id;
     }
 
-    public void setAccount_id(Long account_id) {
-        this.account_id = account_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getFirst_name() {
@@ -82,14 +97,11 @@ public class PersonalInfo {
         this.birthday_date = birthday_date;
     }
 
-    public void addAccount(Account account){
-        this.account_id = account.getId();
-    }
-
     @Override
     public String toString() {
         return "PersonalInfo{" +
-                "account_id=" + account_id +
+                "id=" + id +
+                ", account=" + account +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", birthday_date=" + birthday_date +

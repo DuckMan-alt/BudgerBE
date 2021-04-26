@@ -29,7 +29,12 @@ public class Account {
     )
     private  Long id;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "account")
+    @OneToOne(
+            fetch = FetchType.EAGER,
+            mappedBy = "account",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
+    )
     private PersonalInfo personalInfo;
 
 
